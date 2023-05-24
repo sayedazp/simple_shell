@@ -20,7 +20,7 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 		free(*buf);
 		*buf = NULL;
 		signal(SIGINT, sigintHandler);
-		r = __getline(info, buf, &len_p);
+		r = getline(buf, &len_p, stdin);
 		if (r > 0)
 		{
 			if ((*buf)[r - 1] == '\n')
@@ -41,7 +41,7 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
  * @info: parameter struct
  * @lineptr: address of pointer to buffer, preallocated or NULL
  * @n: size of preallocated lineptr buffer if not NULL
- *
+ * * //r = __getline(info, buf, &len_p);
  * Return: number of char readed
  */
 

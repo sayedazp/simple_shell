@@ -66,7 +66,6 @@ int _eputchar(char c)
 /**
  * print_d - function prints a decimal (integer) number (base 10)
  * @input: the input
- * @fd: the filedescriptor to write to
  *
  * Return: number of characters printed
  */
