@@ -12,6 +12,6 @@ int main(__attribute__((unused))int ac, char **av)
 	info_t info[] = { INFO_INIT };
 
 	populate_env_list(info);
-	shellin(info, av);
+	hsh(info, av);
 	return (EXIT_SUCCESS);
 }
