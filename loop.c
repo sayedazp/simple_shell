@@ -45,6 +45,13 @@ int shellin(info_t *info, char **av)
  *
  * Return: 0 on success, 1 on error, or error code
  */
+/**
+ * hsh - main shell loop
+ * @info: the parameter & return info struct
+ * @av: the argument vector from main()
+ *
+ * Return: 0 on success, 1 on error, or error code
+ */
 int hsh(info_t *info, char **av)
 {
 	ssize_t r = 0;
@@ -53,7 +60,7 @@ int hsh(info_t *info, char **av)
 	while (r != -1 && builtin_ret != -2)
 	{
 		clear_info(info);
-		if (1)
+		if (interactive(info))
 		{
 			if (info->cmd_buf_type == CMD_NORM)
 				_puts("$ ");
@@ -67,13 +74,15 @@ int hsh(info_t *info, char **av)
 			if (builtin_ret == -1)
 				find_cmd(info);
 		}
+		else if (interactive(info))
+			_putchar('\n');
 		else if (r == 0)
 			r = get_input(info);
-		else
-			_putchar('\n');
 		free_info(info, 0);
 	}
 	free_info(info, 1);
+	if (!interactive(info) && info->status)
+		exit(info->status);
 	if (builtin_ret == -2)
 	{
 		if (info->err_num == -1)
@@ -82,6 +91,7 @@ int hsh(info_t *info, char **av)
 	}
 	return (builtin_ret);
 }
+
 
 /**
  * find_cmd - finds a command in PATH
