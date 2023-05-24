@@ -12,6 +12,8 @@ void print_error(info_t *info, char *estr)
 {
 	_eputs(info->fname);
 	_eputs(": ");
+	print_d(info->line_count);
+	_eputs(": ");
 	_eputs(info->argv[0]);
 	_eputs(": ");
 	_eputs(estr);
@@ -59,4 +61,41 @@ int _eputchar(char c)
 	if (c != B_FLUSH)
 		buf[i++] = c;
 	return (1);
+}
+
+/**
+ * print_d - function prints a decimal (integer) number (base 10)
+ * @input: the input
+ * @fd: the filedescriptor to write to
+ *
+ * Return: number of characters printed
+ */
+int print_d(int input)
+{
+
+	int i, count = 0;
+	unsigned int _abs_, current;
+
+	if (input < 0)
+	{
+		_abs_ = -input;
+		_eputchar('-');
+		count++;
+	}
+	else
+		_abs_ = input;
+	current = _abs_;
+	for (i = 1000000000; i > 1; i /= 10)
+	{
+		if (_abs_ / i)
+		{
+			_eputchar('0' + current / i);
+			count++;
+		}
+		current %= i;
+	}
+	_eputchar('0' + current);
+	count++;
+
+	return (count);
 }
