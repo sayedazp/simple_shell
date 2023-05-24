@@ -124,7 +124,7 @@ void find_cmd(info_t *info)
 		else if (*(info->arg) != '\n')
 		{
 			info->status = 127;
-			print_error(info, "command not found\n");
+			print_error(info,  "not found\n");
 		}
 	}
 }
