@@ -69,8 +69,8 @@ int hsh(info_t *info, char **av)
 		}
 		else if (r == 0)
 			r = get_input(info);
-        else
-            _putchar('\n');
+		else
+			_putchar('\n');
 		free_info(info, 0);
 	}
 	free_info(info, 1);
