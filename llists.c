@@ -81,28 +81,6 @@ char **list_to_strings(list_node *head)
 	return (strs);
 }
 
-
-/**
- * print_list - prints all elements of a list_t linked list
- * @h: pointer to first node
- *
- * Return: size of list
- */
-
-size_t print_list(const list_node *h)
-{
-	size_t i = 0;
-
-	while (h)
-	{
-		puts(h->str ? h->str : "(nil)");
-		puts("\n");
-		h = h->next;
-		i++;
-	}
-	return (i);
-}
-
 /**
  * node_starts_with - returns node whose string starts with prefix
  * @node: pointer to list head

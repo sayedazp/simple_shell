@@ -78,3 +78,16 @@ int _cd(info_t *info)
 	}
 	return (0);
 }
+
+
+/**
+ * _theenv - prints the current environment
+ * @info: Structure containing potential arguments. Used to maintain
+ *          constant function prototype.
+ * Return: Always 0
+ */
+int _theenv(info_t *info)
+{
+	print_list(info->env);
+	return (0);
+}

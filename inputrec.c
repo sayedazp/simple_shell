@@ -71,6 +71,7 @@ int find_builtin(info_t *info)
 	builtin_table builtintbl[] = {
 		{"exit", _theexit},
 		{"cd", _cd},
+		{"env", _theenv},
 		{NULL, NULL}
 	};
 

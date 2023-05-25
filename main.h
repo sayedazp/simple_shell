@@ -98,7 +98,7 @@ void _puts(char *str);
 
 list_node *add_node(list_node **, const char *);
 list_node *add_node_end(list_node **, const char *);
-size_t print_list_str(const list_node *);
+size_t print_list(const list_node *);
 int delete_node_at_index(list_node **, unsigned int);
 void free_list(list_node **);
 
@@ -149,9 +149,10 @@ int bfree(void **);
 
 int is_chain(info_t *info, char *buf, size_t j);
 
-size_t print_list(const list_node *h);
 ssize_t input_buf(info_t *info, char **buf, size_t *len);
 int interactive(info_t *info);
 int print_d(int input, int fd);
+
+int _theenv(info_t *info);
 
 #endif
