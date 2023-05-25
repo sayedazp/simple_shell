@@ -8,7 +8,6 @@
  *
  * Return: r
  */
-
 ssize_t input_buf(info_t *info, char **buf, size_t *len)
 {
 	ssize_t r = 0;
@@ -16,21 +15,26 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 
 	if (!*len) /* if nothing left in the buffer, fill it */
 	{
-		bfree(info->cmd_buf);
+		bfree((void **)info->cmd_buf);
 		free(*buf);
 		*buf = NULL;
 		signal(SIGINT, sigintHandler);
-		r = __getline(info, buf, &len_p);
+		r = getline(buf, &len_p, stdin);
 		if (r > 0)
 		{
 			if ((*buf)[r - 1] == '\n')
 			{
+				if ((*buf)[0] == '\n')
+					return (0);
 				(*buf)[r - 1] = '\0'; /* remove trailing newline */
 				r--;
 			}
 			info->linecount_flag = 1;
-			*len = r;
-			info->cmd_buf = buf;
+			/* if (_strchr(*buf, ';')) is this a command chain? */
+			{
+				*len = r;
+				info->cmd_buf = buf;
+			}
 		}
 	}
 	return (r);
@@ -118,8 +122,7 @@ void find_cmd(info_t *info)
 	}
 	else
 	{
-		if ((/*interactive(info) ||sayed*/ _getenv(info, "PATH=")
-					|| info->argv[0][0] == '/') && is_cmd(info, info->argv[0]))
+		if (info->argv[0][0] == '/' && is_cmd(info, info->argv[0]))
 			fork_cmd(info);
 		else if (*(info->arg) != '\n')
 		{
