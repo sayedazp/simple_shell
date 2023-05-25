@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "main.h"
 
 /**
  * main - entry point
@@ -12,6 +12,6 @@ int main(__attribute__((unused))int ac, char **av)
 	info_t info[] = { INFO_INIT };
 
 	populate_env_list(info);
-	hsh(info, av);
+	shellin(info, av);
 	return (EXIT_SUCCESS);
 }

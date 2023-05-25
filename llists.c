@@ -1,4 +1,29 @@
-#include "shell.h"
+#include "main.h"
+
+/**
+ * free_list - frees all nodes of a list
+ * @head_ptr: address of pointer to head node
+ *
+ * Return: void
+ */
+
+void free_list(list_node **head_ptr)
+{
+	list_node *node, *next_node, *head;
+
+	if (!head_ptr || !*head_ptr)
+		return;
+	head = *head_ptr;
+	node = head;
+	while (node)
+	{
+		next_node = node->next;
+		free(node->str);
+		free(node);
+		node = next_node;
+	}
+	*head_ptr = NULL;
+}
 
 /**
  * list_len - determines length of linked list
@@ -6,7 +31,8 @@
  *
  * Return: size of list
  */
-size_t list_len(const list_t *h)
+
+size_t list_len(const list_node *h)
 {
 	size_t i = 0;
 
@@ -24,9 +50,10 @@ size_t list_len(const list_t *h)
  *
  * Return: array of strings
  */
-char **list_to_strings(list_t *head)
+
+char **list_to_strings(list_node *head)
 {
-	list_t *node = head;
+	list_node *node = head;
 	size_t i = list_len(head), j;
 	char **strs;
 	char *str;
@@ -61,17 +88,15 @@ char **list_to_strings(list_t *head)
  *
  * Return: size of list
  */
-size_t print_list(const list_t *h)
+
+size_t print_list(const list_node *h)
 {
 	size_t i = 0;
 
 	while (h)
 	{
-		_puts(convert_number(h->num, 10, 0));
-		_putchar(':');
-		_putchar(' ');
-		_puts(h->str ? h->str : "(nil)");
-		_puts("\n");
+		puts(h->str ? h->str : "(nil)");
+		puts("\n");
 		h = h->next;
 		i++;
 	}
@@ -86,7 +111,8 @@ size_t print_list(const list_t *h)
  *
  * Return: match node or null
  */
-list_t *node_starts_with(list_t *node, char *prefix, char c)
+
+list_node *node_starts_with(list_node *node, char *prefix, char c)
 {
 	char *p = NULL;
 
@@ -98,25 +124,4 @@ list_t *node_starts_with(list_t *node, char *prefix, char c)
 		node = node->next;
 	}
 	return (NULL);
-}
-
-/**
- * get_node_index - gets the index of a node
- * @head: pointer to list head
- * @node: pointer to the node
- *
- * Return: index of node or -1
- */
-ssize_t get_node_index(list_t *head, list_t *node)
-{
-	size_t i = 0;
-
-	while (head)
-	{
-		if (head == node)
-			return (i);
-		head = head->next;
-		i++;
-	}
-	return (-1);
 }
