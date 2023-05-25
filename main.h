@@ -153,4 +153,6 @@ int print_d(int input, int fd);
 
 int _theenv(info_t *info);
 
+
+void check_chain(info_t *info, char *buf, size_t *p, size_t i, size_t len);
 #endif
