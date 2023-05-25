@@ -36,8 +36,6 @@ int shellin(info_t *info, char **av)
 		free_info(info);
 	}
 	ffree_info(info);
-	if (!interactive(info) && info->status)
-		exit(info->status);
 	if (builtin_ret == -2)
 	{
 		if (info->err_num == -1)
