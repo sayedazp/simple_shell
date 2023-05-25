@@ -158,4 +158,6 @@ int is_chain(info_t *info, char *buf, size_t j);
 size_t print_list(const list_node *h);
 ssize_t input_buf(info_t *info, char **buf, size_t *len);
 int interactive(info_t *info);
+int print_d(int input, int fd);
+
 #endif
