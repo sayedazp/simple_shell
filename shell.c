@@ -15,8 +15,11 @@ int shellin(info_t *info, char **av)
 	while (r != -1 && builtin_ret != -2)
 	{
 		clear_info(info);
-		if (info->cmd_buf_type == CMD_NORM)
-			_puts("$ ");
+		if (interactive(info))
+		{
+			if (info->cmd_buf_type == CMD_NORM)
+				_puts("$ ");
+		}
 		_eputchar(B_FLUSH);
 		r = get_input(info);
 		if (r != -1)
@@ -26,10 +29,10 @@ int shellin(info_t *info, char **av)
 			if (builtin_ret == -1)
 				find_cmd(info);
 		}
+		else if (interactive(info))
+			_putchar('\n');
 		else if (r == 0)
 			r = get_input(info);
-		else
-			_putchar('\n');
 		free_info(info);
 	}
 	ffree_info(info);
