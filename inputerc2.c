@@ -96,7 +96,6 @@ int __getline(info_t *info, char **lineptr, size_t *n)
  *
  * Return: void
  */
-
 void find_cmd(info_t *info)
 {
 	char *path = NULL;
@@ -122,7 +121,8 @@ void find_cmd(info_t *info)
 	}
 	else
 	{
-		if (info->argv[0][0] == '/' && is_cmd(info, info->argv[0]))
+		if ((_getenv(info, "PATH=")
+					|| info->argv[0][0] == '/') && is_cmd(info, info->argv[0]))
 			fork_cmd(info);
 		else if (*(info->arg) != '\n')
 		{
