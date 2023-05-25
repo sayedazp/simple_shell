@@ -150,7 +150,7 @@ void ssfree(char **pp);
 void free_info(info_t *info);
 void ffree_info(info_t *info);
 void clear_info(info_t *info);
-int bfree(char **ptr);
+int bfree(void **);
 
 
 int is_chain(info_t *info, char *buf, size_t j);

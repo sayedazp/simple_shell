@@ -79,7 +79,8 @@ void ffree_info(info_t *info)
 		free_list(&(info->alias));
 	ssfree(info->environ);
 	info->environ = NULL;
-	bfree(info->cmd_buf);
+	bfree((void **)info->cmd_buf);
+	_putchar(B_FLUSH);
 }
 
 /**
@@ -88,7 +89,7 @@ void ffree_info(info_t *info)
  * Return: 1 for free proccess or 0
  */
 
-int bfree(char **ptr)
+int bfree(void **ptr)
 {
 	if (ptr && *ptr)
 	{
