@@ -70,8 +70,8 @@ typedef struct passinfo
 	char **environ;
 	int env_changed;
 	int status;
-	char **cmd_buf; /* pointer to cmd ; chain buffer, for memory mangement */
-	int cmd_buf_type; /* CMD_type ||, &&, ; */
+	char **cmd_buf;
+	int cmd_buf_type;
 	int readfd;
 } info_t;
 
@@ -103,10 +103,8 @@ int delete_node_at_index(list_node **, unsigned int);
 void free_list(list_node **);
 
 
-/*envs*/
 int populate_env_list(info_t *info);
 
-/**shell.c**/
 int shellin(info_t *info, char **av);
 ssize_t get_input(info_t *info);
 
