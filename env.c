@@ -11,7 +11,7 @@ int populate_env_list(info_t *info)
 	size_t i;
 
 	for (i = 0; environ[i]; i++)
-		add_node_end(&node, environ[i], 0);
+		add_node_end(&node, environ[i]);
 	info->env = node;
 	return (0);
 }
@@ -91,7 +91,7 @@ int _setenv(info_t *info, char *var, char *value)
 		}
 		node = node->next;
 	}
-	add_node_end(&(info->env), buf, 0);
+	add_node_end(&(info->env), buf);
 	free(buf);
 	info->env_changed = 1;
 	return (0);

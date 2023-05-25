@@ -22,8 +22,8 @@
 extern char **environ;
 
 #define INFO_INIT \
-{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
-			0, 0, 0}
+{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, 0, 0, NULL, \
+			0, 0}
 /**
  * struct liststr - known as list_node
  * @num: the number field
@@ -50,14 +50,11 @@ typedef struct liststr
  * @fname: the program filename
  * @env: linked list local copy of environ
  * @environ: custom modified copy of environ from LL env
- * @history: the history node
- * @alias: the alias node
  * @env_changed: on if environ was changed
  * @status: the return status of the last exec'd command
  * @cmd_buf: address of pointer to cmd_buf, on if chaining
  * @cmd_buf_type: CMD_type ||, &&, ;
  * @readfd: the fd from which to read line input
- * @histcount: the history line number count
  */
 typedef struct passinfo
 {
@@ -70,15 +67,12 @@ typedef struct passinfo
 	int linecount_flag;
 	char *fname;
 	list_node *env;
-	list_node *history;
-	list_node *alias;
 	char **environ;
 	int env_changed;
 	int status;
 	char **cmd_buf; /* pointer to cmd ; chain buffer, for memory mangement */
 	int cmd_buf_type; /* CMD_type ||, &&, ; */
 	int readfd;
-	int histcount;
 } info_t;
 
 /**
@@ -102,8 +96,8 @@ char *itoa(long int num, int base, int flags);
 char *starts_with(const char *haystack, const char *needle);
 void _puts(char *str);
 
-list_node *add_node(list_node **, const char *, int);
-list_node *add_node_end(list_node **, const char *, int);
+list_node *add_node(list_node **, const char *);
+list_node *add_node_end(list_node **, const char *);
 size_t print_list_str(const list_node *);
 int delete_node_at_index(list_node **, unsigned int);
 void free_list(list_node **);
