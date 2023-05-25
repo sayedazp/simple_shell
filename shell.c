@@ -15,11 +15,8 @@ int shellin(info_t *info, char **av)
 	while (r != -1 && builtin_ret != -2)
 	{
 		clear_info(info);
-		if (interactive(info))
-		{
-			if (info->cmd_buf_type == CMD_NORM)
-				_puts("$ ");
-		}
+		if (info->cmd_buf_type == CMD_NORM)
+			_puts("$ ");
 		_eputchar(B_FLUSH);
 		r = get_input(info);
 		if (r != -1)
