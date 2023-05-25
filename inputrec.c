@@ -23,10 +23,11 @@ ssize_t get_input(info_t *info)
 	{
 		j = i;
 		p = buf + i;
-
+		
+		check_chain(info, buf, &j, i, len);
 		while (j < len)
 		{
-			if (is_chain(info, buf, j))
+			if (is_chain(info, buf, &j))
 				break;
 			j++;
 		}
