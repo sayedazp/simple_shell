@@ -29,10 +29,10 @@ int shellin(info_t *info, char **av)
 			if (builtin_ret == -1)
 				find_cmd(info);
 		}
-		else if (interactive(info))
-			_putchar('\n');
 		else if (r == 0)
 			r = get_input(info);
+		else
+			_putchar('\n');
 		free_info(info);
 	}
 	ffree_info(info);
