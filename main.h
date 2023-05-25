@@ -145,7 +145,7 @@ void clear_info(info_t *info);
 int bfree(void **);
 
 
-int is_chain(info_t *, char *, size_t *);
+int is_chain(info_t *info, char *buf, size_t j);
 
 ssize_t input_buf(info_t *info, char **buf, size_t *len);
 int interactive(info_t *info);
@@ -154,5 +154,4 @@ int print_d(int input, int fd);
 int _theenv(info_t *info);
 
 
-void check_chain(info_t *info, char *buf, size_t *p, size_t i, size_t len);
 #endif
