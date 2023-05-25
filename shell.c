@@ -15,7 +15,7 @@ int shellin(info_t *info, char **av)
 	while (r != -1 && builtin_ret != -2)
 	{
 		clear_info(info);
-		if (interactive(info))
+		if (interactive())
 		{
 			if (info->cmd_buf_type == CMD_NORM)
 				_puts("$ ");
@@ -29,7 +29,7 @@ int shellin(info_t *info, char **av)
 			if (builtin_ret == -1)
 				find_cmd(info);
 		}
-		else if (interactive(info))
+		else if (interactive())
 			_putchar('\n');
 		else if (r == 0)
 			r = get_input(info);
@@ -52,7 +52,7 @@ int shellin(info_t *info, char **av)
  *
  * Return: 1 if interactive mode, 0 otherwise
  */
-int interactive(info_t *info)
+int interactive()
 {
-	return (isatty(STDIN_FILENO) && info->readfd <= 2);
+	return (isatty(STDIN_FILENO));
 }
